@@ -1,4 +1,5 @@
-import "./App.css";
+// import "./App.css";
+import "./styles.scss";
 import React, { useState } from "react";
 
 import marked from "marked";
@@ -16,18 +17,25 @@ function App() {
   let test = marked(text);
 
   return (
-    <div id="wrapper">
-      <div id="edit">
+    <div className="wrapper">
+      <div id="edit" className="panel">
         <div className="topbar">
           <i class="ri-pencil-line"></i>Editor
         </div>
-        <textarea onChange={handleChange} value={text} id="editor" />
+        <textarea
+          onChange={handleChange}
+          value={text}
+          id="editor"
+          className="textarea"
+        />
       </div>
-      <div id="preview-panel">
+      <div id="preview-panel" className="panel">
         <div className="topbar">
           <i class="ri-file-search-line"></i>Previewer
         </div>
-        <div id="preview">{ReactHtmlParser(test)}</div>
+        <div id="preview" className="preview">
+          {ReactHtmlParser(test)}
+        </div>
       </div>
     </div>
   );

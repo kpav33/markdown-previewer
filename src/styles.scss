@@ -1,0 +1,153 @@
+// || GENERAL
+:root {
+  --primary: #ea453c;
+  --white: #ffffff;
+  --background-body: #1d2d50;
+  --background-panels: #133b5c;
+  --one: #1e5f74;
+  --two: #fcdab7;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: var(--white);
+  font-family: "Montserrat", sans-serif;
+  background: var(--background-body);
+}
+
+// || APP CONTAINER
+.wrapper {
+  // Use vh to make sure the scrollbar works properly on the preview
+  height: 100vh;
+  display: grid;
+  grid-template: 2fr 3fr / auto;
+  gap: 1rem;
+  padding: 1rem;
+
+  // Layout for larger screens
+  @media only screen and (min-width: 768px) {
+    grid-template: auto / 2fr 3fr;
+  }
+
+  .panel {
+    background: var(--background-panels);
+    height: 100%;
+    display: grid;
+    grid-template: 50px 1fr / 1fr;
+    // Hide the scrollbar on panel to enable it on .preview
+    overflow: hidden;
+
+    .topbar {
+      background: var(--two);
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 1.5rem;
+      border-bottom: solid black 5px;
+      z-index: 5;
+    }
+
+    .textarea {
+      width: 100%;
+      height: 100%;
+      color: var(--white);
+      background: var(--background-panels);
+      border: none;
+      resize: none;
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .preview {
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      word-wrap: break-word;
+      overflow-y: scroll;
+    }
+  }
+}
+
+// || MARKDOWN STYLES
+.preview {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+
+  h1 {
+    border-bottom: 3px solid var(--white);
+    padding-bottom: 0.3rem;
+  }
+
+  h2 {
+    border-bottom: 2px solid var(--white);
+    padding-bottom: 0.3rem;
+  }
+
+  code {
+    background: var(--one);
+    padding: 0.1rem 0.2rem;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font-size: 17px;
+    border-radius: 3px;
+  }
+
+  pre {
+    background: var(--one);
+    padding: 1rem;
+    overflow: auto;
+    border-radius: 3px;
+    line-height: 1.4;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  tr {
+    border-top: 1px solid var(--white);
+  }
+
+  tr:nth-child(2n) {
+      background: rgba(152, 197, 233, 0.4);
+  }
+
+  td,
+  th {
+    padding: 6px 12px;
+    border: 1px solid var(--white);
+  }
+
+  blockquote {
+    padding: 0 1rem;
+    color: #cccccc;
+    border-left: 0.25rem solid #cccccc;
+  }
+
+  a {
+    color: var(--two);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #d06e08;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
