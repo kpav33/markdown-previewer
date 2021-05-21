@@ -1,5 +1,4 @@
 import "./App.css";
-
 import React, { useState } from "react";
 
 import marked from "marked";
@@ -13,20 +12,22 @@ function App() {
     setText(value);
   }
 
-  const marked = require("marked");
   marked.setOptions({ breaks: true });
-
   let test = marked(text);
 
   return (
     <div id="wrapper">
       <div id="edit">
-        <div className="topbar">AYY</div>
+        <div className="topbar">
+          <i class="ri-pencil-line"></i>Editor
+        </div>
         <textarea onChange={handleChange} value={text} id="editor" />
       </div>
-      <div id="preview">
-        <h3>Preview</h3>
-        <div>{ReactHtmlParser(test)}</div>
+      <div id="preview-panel">
+        <div className="topbar">
+          <i class="ri-file-search-line"></i>Previewer
+        </div>
+        <div id="preview">{ReactHtmlParser(test)}</div>
       </div>
     </div>
   );
