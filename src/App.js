@@ -7,12 +7,27 @@ import ReactHtmlParser from "html-react-parser";
 
 function App() {
   const [text, setText] = useState(defaultText);
+  const [fullScr, setFullScr] = useState(false);
+  const [fullScrEditor, setFullScrEditor] = useState(false);
+  const [fullScrPreview, setFullScrPreview] = useState(false);
 
   const fullScreenStyle = {
-    color: "blue",
-    gridTemplate: "1fr 1fr / auto",
+    gridTemplate: "1fr / 1fr",
   };
 
+  // Handles full screen change and back to normal view for editor
+  function changeEditor() {
+    setFullScrEditor((prevState) => !prevState);
+    setFullScr((prevState) => !prevState);
+  }
+
+  // Handles full screen change and back to normal view for preview
+  function changePreview() {
+    setFullScrPreview((prevState) => !prevState);
+    setFullScr((prevState) => !prevState);
+  }
+
+  // Stores input into textarea to state
   function handleChange(e) {
     const { value } = e.target;
     setText(value);
@@ -22,15 +37,23 @@ function App() {
   let test = marked(text);
 
   return (
-    <div className="wrapper">
-      <div id="edit" className="panel">
+    <div className="wrapper" style={fullScr ? fullScreenStyle : null}>
+      <div
+        id="edit"
+        className="panel"
+        style={{ display: fullScrPreview ? "none" : "grid" }}
+      >
         <div className="topbar">
           <div className="title">
             <i class="ri-pencil-line"></i>
             Editor
           </div>
-          <button onClick={() => console.log("OK")}>
-            <i class="ri-fullscreen-line"></i>
+          <button onClick={changeEditor}>
+            {fullScrEditor ? (
+              <i class="ri-fullscreen-exit-line"></i>
+            ) : (
+              <i class="ri-fullscreen-line"></i>
+            )}
           </button>
         </div>
         <textarea
@@ -40,13 +63,21 @@ function App() {
           className="textarea"
         />
       </div>
-      <div id="preview-panel" className="panel">
+      <div
+        id="preview-panel"
+        className="panel"
+        style={{ display: fullScrEditor ? "none" : "grid" }}
+      >
         <div className="topbar">
           <div className="title">
             <i class="ri-file-search-line"></i>Previewer
           </div>
-          <button onClick={() => console.log("OK")}>
-            <i class="ri-fullscreen-exit-line"></i>
+          <button onClick={changePreview}>
+            {fullScrPreview ? (
+              <i class="ri-fullscreen-exit-line"></i>
+            ) : (
+              <i class="ri-fullscreen-line"></i>
+            )}
           </button>
         </div>
         <div id="preview" className="preview">
@@ -110,6 +141,7 @@ Another one. | Getting a bit long. | We should probably stop.
 1. Use just 1s if you want!
 1. And last but not least, let's not forget embedded images:
 
-![freeCodeCamp Logo](https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png)`;
+![freeCodeCamp Logo](https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png)
+`;
 
 export default App;
