@@ -5,9 +5,10 @@ import Panel from "./Panel";
 import marked from "marked";
 import ReactHtmlParser from "html-react-parser";
 
-function Editor(props) {
+function Previewer(props) {
   marked.setOptions({ breaks: true });
   let markdown = marked(props.text);
+
   return (
     <Panel
       fullScrView={props.fullScrEditor}
@@ -23,4 +24,4 @@ function Editor(props) {
   );
 }
 
-export default Editor;
+export default Previewer;

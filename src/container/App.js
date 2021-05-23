@@ -1,12 +1,9 @@
-// import "./App.css";
-import "./styles.scss";
+import "../styles.scss";
 import React, { useState } from "react";
 
-import Editor from "./components/Editor";
-import Previewer from "./components/Previewer";
-import defaultText from "./defaultText";
-
-import marked from "marked";
+import Editor from "../components/Editor";
+import Previewer from "../components/Previewer";
+import defaultText from "../defaultText";
 
 function App() {
   const [text, setText] = useState(defaultText);
@@ -14,6 +11,7 @@ function App() {
   const [fullScrEditor, setFullScrEditor] = useState(false);
   const [fullScrPreview, setFullScrPreview] = useState(false);
 
+  // Styles to use when user wants to fullscreen one of the panels
   const fullScreenStyle = {
     gridTemplate: "1fr / 1fr",
   };
@@ -30,14 +28,11 @@ function App() {
     setFullScr((prevState) => !prevState);
   }
 
-  // Stores input into textarea to state
+  // Stores input from textarea to state
   function handleChange(e) {
     const { value } = e.target;
     setText(value);
   }
-
-  marked.setOptions({ breaks: true });
-  let markdown = marked(text);
 
   return (
     <div className="wrapper" style={fullScr ? fullScreenStyle : null}>
@@ -52,7 +47,6 @@ function App() {
         fullScrEditor={fullScrEditor}
         changeFunction={changePreview}
         fullScreen={fullScrPreview}
-        handleChange={handleChange}
         text={text}
       />
     </div>
