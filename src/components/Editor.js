@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../container/Context";
 
 import Panel from "./Panel";
 
-function Editor(props) {
+function Editor() {
+  const { fullScrPreview, changeEditor, fullScrEditor, handleChange, text } =
+    useContext(Context);
+
   return (
     <Panel
-      fullScrView={props.fullScrPreview}
-      changeFunction={props.changeFunction}
-      fullScreen={props.fullScreen}
+      fullScrView={fullScrPreview}
+      changeFunction={changeEditor}
+      fullScreen={fullScrEditor}
       icon="ri-pencil-line"
       title="Editor"
     >
       <textarea
-        onChange={props.handleChange}
-        value={props.text}
+        onChange={handleChange}
+        value={text}
         id="editor"
         className="textarea"
       />
