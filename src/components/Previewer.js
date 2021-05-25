@@ -10,7 +10,9 @@ function Previewer() {
   const { fullScrPreview, changePreview, fullScrEditor, text } =
     useContext(Context);
 
+  // Adds <br> on a single line break
   marked.setOptions({ breaks: true });
+  // Parse markdown from text input
   let markdown = marked(text);
 
   return (
@@ -22,6 +24,7 @@ function Previewer() {
       title="Previewer"
     >
       <div id="preview" className="preview">
+        {/* Convert HTML strings into React components*/}
         {ReactHtmlParser(markdown)}
       </div>
     </Panel>
